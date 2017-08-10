@@ -6,16 +6,16 @@ regexDatum = re.compile("(\d{2}\.\d{2}\.\d{4})")
 
 datumi = {"danes": 0,
           "vceraj": -1,
-          "včeraj": -1,
+          u"včeraj": -1,
           "predvcerajsnjim": -2,
-          "predvčerajšnjim": -2,
+          u"predvčerajšnjim": -2,
           "jutri": 1,
           "pojutrijsnjem": 2,
-          "pojutrijšnjem": 2
+          u"pojutrijšnjem": 2
          }
 
 dnevi = ["ponedeljek", "torek", "sreda", "cetrtek", "petek", "sobota", "nedelja"]
-dneviSumniki = ["ponedeljek", "torek", "sreda", "četrtek", "petek", "sobota", "nedelja"]
+dneviSumniki = ["ponedeljek", "torek", "sreda", u"četrtek", "petek", "sobota", "nedelja"]
 
 def vDatum(kljucnaBeseda=""):
     danes = datetime.datetime.now()
