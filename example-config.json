@@ -1,0 +1,16 @@
+{
+	"access_token": "<ACCESS_TOKEN>",
+	"server_url": "<SERVER_URL>",
+	"sole": [
+		{
+			"ime": "Šolski center Nova Gorica",
+			"kratica": "SCNG",
+			"glavni_url": "https://malica.scng.si/Account/LogOn?ReturnUrl=%2f"
+		},
+		{
+			"ime": "Gimnazija Nova Gorica",
+			"kratica": "GIMNG",
+			"glavni_url": "http://malica.gimng.si/SpletneOdjave/Account/LogOn?ReturnUrl=/SpletneOdjave/"
+		}
+	]
+}

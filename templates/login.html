@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Prijava</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">
+				<h1>Povezovanje računov</h1>
+				<!--<div class="alert alert-success"><strong>Super!</strong> Podatki so bili spremenjeni.</div>-->
+				<form action="{{ authorization_url }}" method="POST">
+					<div class="form-group">
+						<input type="hidden" name="account_linking_token" value="{{ account_linking_token }}">
+						<input type="hidden" name="redirect_uri" value="{{ redirect_uri }}">
+						<label for="uporabnisko-ime">Uporabniško ime</label>
+						<input type="text" id="uporabnisko-ime" name="uporabnisko_ime" class="form-control"><br>
+						<label for="geslo">Geslo</label>
+						<input type="password" id="geslo" name="geslo" class="form-control"><br>
+						<label for="sola">Šola</label>
+						<select name="sola" id="sola" class="form-control">
+							{% for sola in sole %}
+								<option value="{{ sola.kratica }}">{{ sola.ime }}</option>
+							{% endfor %}
+						</select><br>
+						<input type="submit" class="btn btn-primary" value="Prijava">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
