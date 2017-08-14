@@ -15,6 +15,8 @@ accessToken = data["access_token"]
 serverUrl = data["server_url"]
 sole = data["sole"]
 
+days = ["ponedeljek", "torek", "sredo", "četrtek", "petek", "soboto", "nedeljo"]
+
 # Ustvarimo ustrezne gumbe za povezovanje racuna
 gumbPrijava = elements.AccountLinkingButton(url="{}{}".format(serverUrl, "/prijava"))
 gumbiZaSePrijavit = templates.ButtonTemplate(text='Prosim prijavi se s pomočjo spodnjega gumba.', buttons=[gumbPrijava])
@@ -117,22 +119,23 @@ def parseUserMessage(message, recipient):
 			try:
 				mealType = user.pridobiPodatkeNaDan(date)
 				if mealType == "OSN":
-					sendMessage(recipient, "Dne ({}) si na toplem obroku. {}".format(date.strftime("%d.%m.%Y"), random.choice(topelObrokEmojiji)))
+					sendMessage(recipient, "V {}, {} si na toplem obroku. {}".format(days[date.weekday()], date.strftime("%d.%m.%Y"), random.choice(topelObrokEmojiji)))
 				elif mealType == "SUH":
-					sendMessage(recipient, "Dne ({}) si na suhem obroku. {}".format(date.strftime("%d.%m.%Y"), random.choice(suhObrokEmojiji)))
+					sendMessage(recipient, "V {}, {} si na suhem obroku. {}".format(days[date.weekday()], date.strftime("%d.%m.%Y"), random.choice(suhObrokEmojiji)))
 				else:
-					sendMessage(recipient, "Dne ({}) si od malice odjavljen! Pametna odločitev 😉".format(date.strftime("%d.%m.%Y")))
+					sendMessage(recipient, "V {}, {} si od malice odjavljen. ❌".format(days[date.weekday()], date.strftime("%d.%m.%Y")))
 			except Exception:
 				sendMessage(recipient, "Oprostite, toda na ta datum ne morem najti podatkov...")
 		elif command == 'prijava':
-			pass
+			user.prijava(date)
+			sendMessage(recipient, "V {}, {} si na toplem obroku. {}".format(days[date.weekday()], date.strftime("%d.%m.%Y"), random.choice(topelObrokEmojiji)))
 		elif command == 'odjava':
 			user.odjava(date)
-			sendMessage(recipient, "Dne {} si od malice odjavjen.".format(date.strftime("%d.%m.%Y")))
+			sendMessage(recipient, "V {}, {} si od malice odjavljen. ❌".format(days[date.weekday()], date.strftime("%d.%m.%Y")))
 		elif command == 'zamenjava':
 			if len(receivedMealType) > 0:
 				user.zamenjava(date, receivedMealType)
-				sendMessage(recipient, "Dne {} si na {} obroku.".format(date.strftime("%d.%m.%Y"), receivedMealType))
+				sendMessage(recipient, "V {}, {} si na {} obroku.".format(days[date.weekday()], date.strftime("%d.%m.%Y"), receivedMealType))
 			else:
 				gumbSuhiObrok = elements.PostbackButton(title="Suhi obrok", payload="zamenjava {}:suh".format(date.strftime("%d.%m.%Y")))
 				gumbOsnovniObrok = elements.PostbackButton(title="Topli obrok", payload="zamenjava {}:osn".format(date.strftime("%d.%m.%Y")))
