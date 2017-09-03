@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from flask import Flask, request, redirect, render_template, send_from_directory
-from messengerbot import MessengerClient, messages, attachments, templates, elements, users
+from messengerbot import MessengerClient, messages, attachments, templates, elements
 import sqlite3 as lite
+import customelements
 import requests, random, json
 import malica, datumi, prenesipodatke
 import threading
@@ -18,7 +19,7 @@ sole = data["sole"]
 days = ["ponedeljek", "torek", "sredo", "četrtek", "petek", "soboto", "nedeljo"]
 
 # Ustvarimo ustrezne gumbe za povezovanje racuna
-gumbPrijava = elements.AccountLinkingButton(url="{}{}".format(serverUrl, "/prijava"))
+gumbPrijava = customelements.AccountLinkingButton(url="{}{}".format(serverUrl, "/prijava"))
 gumbiZaSePrijavit = templates.ButtonTemplate(text='Prosim prijavi se s pomočjo spodnjega gumba.', buttons=[gumbPrijava])
 priponkaPrijava = attachments.TemplateAttachment(template=gumbiZaSePrijavit)
 
