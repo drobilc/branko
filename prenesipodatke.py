@@ -13,7 +13,7 @@ def soGrafiZeIzdelani(uporabnik):
     return len(datoteke) > 0;
 
 def prenesiVsePodatkeUporabnika(uporabnik):
-	#Gremo od danes nazaj dokler ne naletimo na prazno mnozico podatkov
+    #Gremo od danes nazaj dokler ne naletimo na prazno mnozico podatkov
     #Danasnji datum
     danes = datetime.datetime.now()
 
@@ -53,10 +53,9 @@ def ustvariGrafe(imeDatoteke, uporabnik):
     for kljuc in podatkiZaPretvorit:
         datum = datetime.datetime.strptime(kljuc, "%Y-%m-%d")
         podatki[datum] = podatkiZaPretvorit[kljuc]
-	
 
-	#Narisemo vse 3 grafe
-	graf.narisiGrafTeden(podatki, "grafi/{}_dnevni.html".format(uporabnik.uporabniskoIme))
-	graf.narisiGrafMesec(podatki, "grafi/{}_mesecni.html".format(uporabnik.uporabniskoIme))
-	graf.narisiTortniDiagram(podatki, "grafi/{}_tortni.html".format(uporabnik.uporabniskoIme))
+        #Narisemo vse 3 grafe
+        graf.narisiGrafTeden(podatki, "grafi/{}_dnevni.html".format(uporabnik.uporabniskoIme))
+        graf.narisiGrafMesec(podatki, "grafi/{}_mesecni.html".format(uporabnik.uporabniskoIme))
+        graf.narisiTortniDiagram(podatki, "grafi/{}_tortni.html".format(uporabnik.uporabniskoIme))
 
